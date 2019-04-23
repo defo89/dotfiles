@@ -1,0 +1,20 @@
+## run "brew bundle"
+# taps
+tap "cc/cc"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+
+# brews
+brew "autojump"
+brew "dep"
+brew "direnv"
+brew "fish"
+brew "fontconfig"
+brew "glide"
+brew "ipcalc"
+brew "jq"
+brew "sshuttle"
+brew "watch"
+brew "wget"
+brew "fzf"
