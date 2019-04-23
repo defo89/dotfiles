@@ -35,14 +35,6 @@ alias dnskill 'sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;
 
 alias sshclean 'ssh-keygen -R'
 
-function fish_user_key_bindings
-  bind \e.       'history-token-search-backward'
-  bind \e\[1\;9A 'history-token-search-backward'
-  bind \e\[1\;9B 'history-token-search-forward'
-  bind \e\[1\;9C 'forward-word'
-  bind \e\[1\;9D 'backward-word'
-end
-
 [ -f /usr/local/share/autojump/autojump.fish ]; and . /usr/local/share/autojump/autojump.fish
 eval (direnv hook fish)
 
