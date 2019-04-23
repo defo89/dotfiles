@@ -31,8 +31,11 @@ alias ls 'command ls -FG'
 alias w 'curl wttr.in/daugavpils'
 alias wb 'curl wttr.in/berlin'
 
-alias dnskill 'sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
+alias dnskill 'sudo killall -HUP mDNSResponder;sudo dscacheutil -flushcache'
+alias myip='curl api.ipify.org -w "\n"'
+alias speed='speedtest-cli --simple'
 
+alias oldssh='ssh -o KexAlgorithms=+diffie-hellman-group1-sha1'
 alias sshclean 'ssh-keygen -R'
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and . /usr/local/share/autojump/autojump.fish
