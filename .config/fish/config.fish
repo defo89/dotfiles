@@ -38,8 +38,11 @@ alias kgpa="kubectl get pod -o wide --all-namespaces"
 alias kl="kubectl logs --tail=50"
 
 alias g="git"
+alias ga="git add"
+alias gc="git commit"
 alias gs="git status"
 alias gitmaster 'git checkout master'
+alias gitmerge 'git merge origin/master'
 alias gitupdatefork 'git checkout master && git fetch upstream && git rebase upstream/master && git push origin master'
 alias gitlocal 'git checkout -b local'
 alias gitreset 'git reset --hard'
