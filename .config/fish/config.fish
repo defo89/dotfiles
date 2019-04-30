@@ -15,6 +15,8 @@ set -g fish_user_paths "/usr/local/opt/go/libexec/bin" $fish_user_paths
 
 alias h="helm"
 
+alias klocal="set -gx KUBECONFIG (pwd)/.kubeconfig"
+
 alias k="kubectl"
 alias kg="kubectl get"
 alias kd="kubectl describe"
