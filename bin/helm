@@ -1,6 +1,12 @@
 #!/bin/bash  
 
-HELM_COMMAND=/usr/local/bin/helm-v2.11.0
+# install other versions
+# wget -q --show-progress --https-only --timestamping \
+# https://storage.googleapis.com/kubernetes-helm/helm-v2.13.1-darwin-amd64.tar.gz
+# tar xzf helm-v2.13.1-darwin-amd64.tar.gz
+# chmod 744 darwin-amd64/helm && mv darwin-amd64/helm /usr/local/bin/helm-v2.13.1
+
+HELM_COMMAND=/usr/local/bin/helm-v2.13.1
 KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-$(${KUBECTL_COMMAND} config current-context)}
 
 exec $HELM_COMMAND --kube-context $KUBECTL_CONTEXT "$@"
