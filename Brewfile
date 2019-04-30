@@ -6,11 +6,11 @@ tap "homebrew/cask"
 tap "homebrew/core"
 
 # casks
-cask "1password"
-cask "docker"
-cask "dropbox"
-cask "evernote"
-cask "iterm22"
+# cask "1password"
+# cask "docker"
+# cask "dropbox"
+# cask "evernote"
+# cask "iterm22"
 cask "muzzle"
 
 # brews
