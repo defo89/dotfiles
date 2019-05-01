@@ -13,6 +13,8 @@ set -g fish_user_paths "/usr/local/opt/curl/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/coreutils/libexec/gnubin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/go/libexec/bin" $fish_user_paths
 
+alias c="code ."
+
 alias h="helm"
 
 alias klocal="set -gx KUBECONFIG (pwd)/.kubeconfig"
