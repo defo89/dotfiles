@@ -19,10 +19,12 @@ symlink:
 	sudo rm -rf /usr/local/bin/kubectl
 	sudo rm -rf /usr/local/bin/openstack
 	sudo rm -rf /usr/local/bin/helm
+	sudo rm -rf /usr/local/bin/terraform
 	# Symlink new bins
 	ln -sf ~/dotfiles/bin/kubectl /usr/local/bin/kubectl
 	ln -sf ~/dotfiles/bin/openstack /usr/local/bin/openstack
 	ln -sf ~/dotfiles/bin/helm /usr/local/bin/helm
+	ln -sf ~/dotfiles/bin/terraform /usr/local/bin/terraform
 
 shell:
 	# Set fish as the default shell

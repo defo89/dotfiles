@@ -1,3 +1,3 @@
 #!/bin/bash  
 
-docker run -ti --env-file=<(env) -v (pwd):/wd -w /wd sapcc/terraform terraform $argv
+docker run --network host -ti -v 'pwd':/wd -w /wd sapcc/terraform $(basename $(readlink -n $0)) $@ 
