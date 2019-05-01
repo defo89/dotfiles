@@ -20,6 +20,8 @@ alias klocal="set -gx KUBECONFIG (pwd)/.kubeconfig"
 alias k="kubectl"
 alias kg="kubectl get"
 alias kd="kubectl describe"
+alias kgs="kubectl get svc"
+alias kds="kubectl describe svc"
 alias kgds="kubectl get ds"
 alias kdds="kubectl describe ds"
 alias kgd="kubectl get deployment"
@@ -43,6 +45,8 @@ alias g="git"
 alias ga="git add"
 alias gc="git commit"
 alias gs="git status"
+alias gpsh="git push"
+alias gpl="git pull"
 alias gitmaster 'git checkout master'
 alias gitmerge 'git merge origin/master'
 alias gitupdatefork 'git checkout master && git fetch upstream && git rebase upstream/master && git push origin master'
