@@ -22,6 +22,8 @@ alias klocal="set -gx KUBECONFIG (pwd)/.kubeconfig"
 alias k="kubectl"
 alias kg="kubectl get"
 alias kd="kubectl describe"
+alias kgi="kubectl get ingress"
+alias kdi="kubectl describe ingress"
 alias kgs="kubectl get svc"
 alias kds="kubectl describe svc"
 alias kgds="kubectl get ds"
@@ -49,25 +51,27 @@ alias gc="git commit"
 alias gs="git status"
 alias gpsh="git push"
 alias gpl="git pull"
-alias gitmaster 'git checkout master'
-alias gitmerge 'git merge origin/master'
-alias gitupdatefork 'git checkout master && git fetch upstream && git rebase upstream/master && git push origin master'
-alias gitlocal 'git checkout -b local'
-alias gitreset 'git reset --hard'
+alias gitmaster='git checkout master'
+alias gitmerge='git merge origin/master'
+alias gitupdatefork='git checkout master && git fetch upstream && git rebase upstream/master && git push origin master'
+alias gitlocal='git checkout -b local'
+alias gitreset='git reset --hard'
 
-alias ll 'ls -la'
-alias ltime 'ls -lart'
-alias ls 'command ls -FG'
+alias ll='ls -la'
+alias ltime='ls -lart'
+alias ls='command ls -FG'
 
-alias w 'curl wttr.in/daugavpils'
-alias wb 'curl wttr.in/berlin'
+alias w='curl wttr.in/daugavpils'
+alias wb='curl wttr.in/berlin'
 
-alias dnskill 'sudo killall -HUP mDNSResponder;sudo dscacheutil -flushcache'
+alias dnskill='sudo killall -HUP mDNSResponder;sudo dscacheutil -flushcache'
 alias myip='curl api.ipify.org -w "\n"'
 alias speed='speedtest-cli --simple'
 
 alias oldssh='ssh -o KexAlgorithms=+diffie-hellman-group1-sha1'
-alias sshclean 'ssh-keygen -R'
+alias sshclean='ssh-keygen -R'
+
+alias dockerclean='docker system prune'
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and . /usr/local/share/autojump/autojump.fish
 eval (direnv hook fish)
