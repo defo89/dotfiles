@@ -43,6 +43,9 @@ alias kdp="kubectl describe pod"
 alias kgpnr="kubectl get pod -o wide | grep -v Running"
 alias kgpanr="kubectl get pod -o wide --all-namespaces | grep -v Running"
 alias kgpa="kubectl get pod -o wide --all-namespaces"
+alias kdelp="kubectl delete pod"
+alias kdelpf="kubectl delete pod --force --grace-period=0"
+
 alias kl="kubectl logs --tail=50"
 
 alias g="git"
