@@ -8,7 +8,7 @@
 
 set -e
 
-KUBECTL_VERSION=1.13.4
+KUBECTL_VERSION=1.8.15
 KUBECTL_COMMAND=/usr/local/bin/kubectl-v$KUBECTL_VERSION
 KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
 [[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
