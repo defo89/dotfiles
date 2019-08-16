@@ -19,6 +19,7 @@ symlink:
 	sudo rm -rf /usr/local/bin/kubectl
 	sudo rm -rf /usr/local/bin/openstack
 	sudo rm -rf /usr/local/bin/helm
+	sudo rm -rf /usr/local/bin/helm3
 	sudo rm -rf /usr/local/bin/terraform
 	sudo rm -rf /usr/local/bin/terragrunt
 	sudo rm -rf /usr/local/bin/fly
@@ -26,6 +27,7 @@ symlink:
 	ln -sf ~/dotfiles/bin/kubectl /usr/local/bin/kubectl
 	ln -sf ~/dotfiles/bin/openstack /usr/local/bin/openstack
 	ln -sf ~/dotfiles/bin/helm /usr/local/bin/helm
+	ln -sf ~/dotfiles/bin/helm3 /usr/local/bin/helm3
 	ln -sf ~/dotfiles/bin/terraform /usr/local/bin/terraform
 	ln -sf ~/dotfiles/bin/terragrunt /usr/local/bin/terragrunt
 	ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly
