@@ -11,6 +11,9 @@ iterm:
 	defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 symlink:
+	# gitignore
+	sudo rm -f ~/.gitignore
+	ln -sf ~/dotfiles/.gitignore ~/.gitignore
 	# Remove old dot files
 	sudo rm -rf ~/.config
 	# Create symlinks in the home folder

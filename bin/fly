@@ -1,9 +1,9 @@
 #!/bin/bash  
 
 # install other versions
-# chmod 744 fly && mv fly /usr/local/bin/fly-v5.1.0
+# chmod 744 fly && mv fly /usr/local/bin/fly-v5.4.1
 
-FLY_COMMAND=/usr/local/bin/fly-v5.1.0
+FLY_COMMAND=/usr/local/bin/fly-v5.4.1
 FLY_TARGET=concourse-new
 
 exec $FLY_COMMAND -t $FLY_TARGET "$@"

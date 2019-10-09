@@ -35,3 +35,7 @@ config/fish/functions/testbox_aws.fish
 config/fish/functions/*_aws.fish
 config/beets/library.db
 
+# General
+.idea
+log/
+*.log
