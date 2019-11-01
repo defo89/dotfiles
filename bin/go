@@ -1,0 +1,9 @@
+#!/bin/bash  
+
+# go get golang.org/dl/go1.13.4
+# go1.13.4 download
+# which go1.13.4
+
+GO_COMMAND=~/go/bin/go1.13.4
+
+exec $GO_COMMAND "$@"

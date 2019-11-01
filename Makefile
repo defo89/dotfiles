@@ -26,6 +26,7 @@ symlink:
 	sudo rm -rf /usr/local/bin/terraform
 	sudo rm -rf /usr/local/bin/terragrunt
 	sudo rm -rf /usr/local/bin/fly
+	sudo rm -rf /usr/local/go/bin/go
 	# Symlink new bins
 	ln -sf ~/dotfiles/bin/kubectl /usr/local/bin/kubectl
 	ln -sf ~/dotfiles/bin/openstack /usr/local/bin/openstack
@@ -34,6 +35,7 @@ symlink:
 	ln -sf ~/dotfiles/bin/terraform /usr/local/bin/terraform
 	ln -sf ~/dotfiles/bin/terragrunt /usr/local/bin/terragrunt
 	ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly
+	ln -sf ~/dotfiles/bin/go /usr/local/go/bin/go
 
 shell:
 	# Set fish as the default shell
