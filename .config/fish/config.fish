@@ -14,6 +14,7 @@ set -g fish_user_paths "/usr/local/opt/coreutils/libexec/gnubin" $fish_user_path
 set -g fish_user_paths "/usr/local/opt/go/libexec/bin" $fish_user_paths
 
 alias c="code ."
+alias goland="/usr/local/bin/goland"
 
 alias o="openstack"
 alias ozl="openstack zone list"
