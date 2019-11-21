@@ -8,13 +8,16 @@
 
 set -e
 
+KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
 KUBECTL_VERSION=${KUBECTL_VERSION:-1.8.15}
 KUBECTL_COMMAND=/usr/local/bin/kubectl-v$KUBECTL_VERSION
 KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
 [[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
-test "monsoonctl  --context=$KUBECTL_CONTEXT --github-token=$(security find-generic-password -a $USER -s monsoonctl -w)"
-test "kubernikusctl auth refresh --context=$KUBECTL_CONTEXT --password=$(security find-generic-password -a $USER -s openstack -w)"
+
+if [ ! -f "kubectl-sync" ]; then
+  kubectl-sync logon --kubecontext=$KUBECTL_CONTEXT -u $USER -p $(security find-generic-password -a $USER -s openstack -w) --token $(security find-generic-password -a $USER -s monsoonctl -w)
+fi
 
 echo "Current context is $KUBECTL_CONTEXT"
 exec $KUBECTL_COMMAND --context $KUBECTL_CONTEXT --namespace $KUBECTL_NAMESPACE "$@"
