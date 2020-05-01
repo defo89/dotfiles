@@ -1,6 +1,6 @@
 set -g fish_greeting ''
 
-set EDITOR /usr/local/bin/mvim
+set EDITOR /usr/bin/vim
 set -x GOPATH $HOME/go
 set -x GOBINPATH $HOME/goBin
 
@@ -25,6 +25,7 @@ alias h="helm"
 alias klocal="set -gx KUBECONFIG (pwd)/.kubeconfig"
 
 alias k="kubectl"
+alias kinfo="kubectl cluster-info"
 alias kg="kubectl get"
 alias kd="kubectl describe"
 alias kgi="kubectl get ingress"
@@ -41,7 +42,7 @@ alias kga="kubectl get all"
 alias kda="kubectl describe all"
 alias kgns="kubectl get ns"
 alias kdns="kubectl describe ns"
-alias kgn="kubectl get node"
+alias kgn="kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,zone,species,container-linux-update.v1.coreos.com/version"
 alias kdn="kubectl describe node"
 alias kgp="kubectl get pod -o wide"
 alias kdp="kubectl describe pod"
@@ -51,10 +52,15 @@ alias kgpanrcount="kubectl get pod -o wide --all-namespaces | grep -v Running | 
 alias kgpa="kubectl get pod -o wide --all-namespaces"
 alias kgpacount="kubectl get pod -o wide --all-namespaces | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
 alias kdelp="kubectl delete pod"
-alias kdelpf="kubectl delete pod --force --grace-period=0"
+alias kdelpforce="kubectl delete pod --force --grace-period=0"
+alias kpodcountnodes="kubectl describe node | grep 'Name:\|Non-terminated'"
+alias knodesaz="kubectl describe node | grep 'Name:\|failure-domain'"
+alias kpodcount="kubectl get pod -o wide --all-namespaces | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
+alias kpodcountnr="kubectl get pod -o wide --all-namespaces | grep -v Running | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
+alias kdrain="kubectl drain --ignore-daemonsets --delete-local-data --force"
 
 alias kl="kubectl logs --tail=50"
-alias wkgn="watch -n 1 kubectl get node"
+alias wkgn="watch -n 1 kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,zone,species,container-linux-update.v1.coreos.com/version"
 alias wkgp="watch -n 1 kubectl get pod -o wide"
 alias wkgpnr="watch -n 1 'kubectl get pod -o wide | grep -v Running'"
 alias wkgpanr="watch -n 1 'kubectl get pod -o wide --all-namespaces | grep -v Running'"
@@ -64,12 +70,16 @@ alias ga="git add"
 alias gc="git commit"
 alias gs="git status"
 alias gpsh="git push"
-alias gpl="git pull"
+alias gpl="git pull --rebase"
 alias gitmaster="git checkout master"
 alias gitmerge="git merge origin/master"
 alias gitupdatefork="git checkout master && git fetch upstream && git rebase upstream/master && git push origin master"
 alias gitlocal="git checkout -b local"
 alias gitreset="git reset --hard"
+
+alias ap="ansible-playbook"
+alias apv="ansible-playbook --vault-password-file=.vault_password"
+alias av="ansible-vault"
 
 alias ll="ls -la"
 alias ltime="ls -lart"

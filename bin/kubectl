@@ -2,8 +2,8 @@
 
 # install other versions
 # wget -q --show-progress --https-only --timestamping \
-# https://storage.googleapis.com/kubernetes-release/release/v1.13.4/bin/darwin/amd64/kubectl
-# chmod 744 kubectl && mv kubectl /usr/local/bin/kubectl-v1.13.4
+# https://storage.googleapis.com/kubernetes-release/release/v1.15.9/bin/darwin/amd64/kubectl
+# chmod 744 kubectl && mv kubectl /usr/local/bin/kubectl-v1.15.9
 
 
 set -e
@@ -16,8 +16,7 @@ KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
 
 
 if [ ! -f "kubectl-sync" ]; then
-  kubectl-sync logon --kubecontext=$KUBECTL_CONTEXT -u $USER -p $(security find-generic-password -a $USER -s openstack -w) --token $(security find-generic-password -a $USER -s monsoonctl -w)
+  kubectl-sync logon --context=$KUBECTL_CONTEXT -u $USER -p $(security find-generic-password -a $USER -s openstack -w)
 fi
 
-echo "Current context is $KUBECTL_CONTEXT"
 exec $KUBECTL_COMMAND --context $KUBECTL_CONTEXT --namespace $KUBECTL_NAMESPACE "$@"
