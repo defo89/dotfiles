@@ -1,0 +1,18 @@
+#!/bin/bash  
+
+# wget -q --show-progress --https-only --timestamping \
+# https://github.wdf.sap.corp/cc/kubectl-logon/releases/latest/download/kubectl-logon_darwin_amd64
+# chmod 744 kubectl-logon_darwin_amd64 && mv kubectl-logon_darwin_amd64 /usr/local/bin/kubectl-logon_darwin_amd64-latest
+
+set -e
+
+COMMAND=/usr/local/bin/kubernikusctl-latest
+
+OS_PASSWORD=${OS_PASSWORD:-$(security find-generic-password -a $USER -s openstack -w)}
+OS_USERNAME=${OS_USERNAME:-$USER}
+[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+OS_REGION_NAME=${OS_REGION_NAME:-$KUBECTL_CONTEXT}
+OS_AUTH_URL=${OS_AUTH_URL:-https://identity-3.$OS_REGION_NAME.cloud.sap:443/v3}
+OS_USER_DOMAIN_NAME=${OS_USER_DOMAIN_NAME}
+
+exec $COMMAND --auth-url ${OS_AUTH_URL} --username ${OS_USERNAME} --password ${OS_PASSWORD} --user-domain-name ${OS_USER_DOMAIN_NAME} $@

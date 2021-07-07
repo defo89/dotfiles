@@ -3,6 +3,10 @@ set -g fish_greeting ''
 set EDITOR /usr/bin/vim
 set -x GOPATH $HOME/go
 set -x GOBINPATH $HOME/goBin
+set -x K8S_USERNAME $USER
+set -x K8S_PASSWORD (security find-generic-password -a $USER -s openstack -w)
+set -x GITHUB_TOKEN (security find-generic-password -a $USER -s monsoonctl -w)
+set -x NETBOX_TOKEN (security find-generic-password -a $USER -s netboxprod -w)
 
 set -g fish_user_paths "/usr/local/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
@@ -27,6 +31,9 @@ alias klocal="set -gx KUBECONFIG (pwd)/.kubeconfig"
 alias k="kubectl"
 alias kinfo="kubectl cluster-info"
 alias kg="kubectl get"
+alias ky="kubectl get -o yaml"
+alias ksync="kubectl-sync --kubeconfig ~/.kube/config"
+alias klogon="kubectl-logon"
 alias kd="kubectl describe"
 alias kgi="kubectl get ingress"
 alias kdi="kubectl describe ingress"
@@ -42,13 +49,13 @@ alias kga="kubectl get all"
 alias kda="kubectl describe all"
 alias kgns="kubectl get ns"
 alias kdns="kubectl describe ns"
-alias kgn="kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,zone,species,container-linux-update.v1.coreos.com/version"
+alias kgn="kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,kubernetes.cloud.sap/cp,kubernetes.cloud.sap/apod,kubernetes.cloud.sap/host"
 alias kdn="kubectl describe node"
 alias kgp="kubectl get pod -o wide"
 alias kdp="kubectl describe pod"
-alias kgpnr="kubectl get pod -o wide | grep -v Running"
-alias kgpanr="kubectl get pod -o wide --all-namespaces | grep -v Running"
-alias kgpanrcount="kubectl get pod -o wide --all-namespaces | grep -v Running | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
+alias kgpnr="kubectl get pod -o wide | grep -v 'Running\|Completed'"
+alias kgpanr="kubectl get pod -o wide --all-namespaces | grep -v 'Running\|Completed'"
+alias kgpanrcount="kubectl get pod -o wide --all-namespaces | grep -v 'Running\|Completed' | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
 alias kgpa="kubectl get pod -o wide --all-namespaces"
 alias kgpacount="kubectl get pod -o wide --all-namespaces | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
 alias kdelp="kubectl delete pod"
@@ -56,14 +63,17 @@ alias kdelpforce="kubectl delete pod --force --grace-period=0"
 alias kpodcountnodes="kubectl describe node | grep 'Name:\|Non-terminated'"
 alias knodesaz="kubectl describe node | grep 'Name:\|failure-domain'"
 alias kpodcount="kubectl get pod -o wide --all-namespaces | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
-alias kpodcountnr="kubectl get pod -o wide --all-namespaces | grep -v Running | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
+alias kpodcountnr="kubectl get pod -o wide --all-namespaces | grep -v 'Running\|Completed' | grep -v 'Current context' | grep -v NAMESPACE | wc -l"
 alias kdrain="kubectl drain --ignore-daemonsets --delete-local-data --force"
+alias kcidr="kubectl describe nodes | grep PodCIDR | awk '{print $2}' | sort"
 
 alias kl="kubectl logs --tail=50"
-alias wkgn="watch -n 1 kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,zone,species,container-linux-update.v1.coreos.com/version"
+alias wkgn="watch -n 1 kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,kubernetes.cloud.sap/cp,kubernetes.cloud.sap/apod,kubernetes.cloud.sap/host"
 alias wkgp="watch -n 1 kubectl get pod -o wide"
-alias wkgpnr="watch -n 1 'kubectl get pod -o wide | grep -v Running'"
-alias wkgpanr="watch -n 1 'kubectl get pod -o wide --all-namespaces | grep -v Running'"
+alias wkgpnr="watch -n 1 'kubectl get pod -o wide | grep -v Running | grep -v Completed'"
+alias wkgpanr="watch -n 1 'kubectl get pod -o wide --all-namespaces | grep -v Running| grep -v Completed'"
+
+alias cont="kubectl --kubeconfig '/Users/c5267192/OneDrive - SAP SE/Desktop/HOMESHARE/CCLOUD/gateway-api/contour-config.yml' --context contour"
 
 alias g="git"
 alias ga="git add"
@@ -90,12 +100,18 @@ alias wopen="open -n /Applications/Wireshark.app"
 alias w="curl wttr.in/daugavpils"
 alias wb="curl wttr.in/berlin"
 
-alias dnskill="sudo killall -HUP mDNSResponder;sudo dscacheutil -flushcache"
+alias dnskill="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
 alias myip="curl api.ipify.org -w \n"
 alias speed="speedtest-cli --simple"
 
 alias oldssh="ssh -o KexAlgorithms=+diffie-hellman-group1-sha1"
 alias sshclean="ssh-keygen -R"
+alias sshc="ssh-keygen -R"
+
+alias flyservices="fly5 -t eu-de-2 login --team-name services"
+alias flycontrolplane="fly5 -t eu-de-2 login --team-name controlplane"
+
+alias ksshall="kgn | awk '{print $1}' | grep -v "NAME" | tr '\n' ' ' | xargs csshX --login core"
 
 alias dockerclean="docker system prune"
 

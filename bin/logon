@@ -1,0 +1,21 @@
+#!/bin/bash  
+
+# wget -q --show-progress --https-only --timestamping \
+# https://github.wdf.sap.corp/cc/kubectl-logon/releases/latest/download/kubectl-logon_darwin_amd64
+# chmod 744 kubectl-logon_darwin_amd64 && mv kubectl-logon_darwin_amd64 /usr/local/bin/kubectl-logon
+
+set -e
+
+KLOGON=/usr/local/bin/kubectl-logon
+KSYNC=/usr/local/bin/kubectl-sync
+KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
+[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+
+#if [[ "$KUBECTL_CONTEXT" == "a-"* ]]
+#then
+# exec $KSYNC logon --context=$KUBECTL_CONTEXT -u $USER -t $(security find-generic-password -a $USER -s monsoonctl -w)
+#else
+# exec $KLOGON --kubecontext=$KUBECTL_CONTEXT -u $USER -p $(security find-generic-password -a $USER -s openstack -w)
+#fi
+
+exec $KSYNC logon --context=$KUBECTL_CONTEXT

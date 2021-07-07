@@ -20,22 +20,28 @@ symlink:
 	ln -sf ~/dotfiles/.config ~/.config
 	# Remove old bins
 	sudo rm -rf /usr/local/bin/kubectl
+	sudo rm -rf /usr/local/bin/logon
+	sudo rm -rf /usr/local/bin/logonf
+	sudo rm -rf /usr/local/bin/kubernikusctl
+	sudo rm -rf /usr/local/go/bin/k9s
 	sudo rm -rf /usr/local/bin/openstack
 	sudo rm -rf /usr/local/bin/helm
 	sudo rm -rf /usr/local/bin/helm3
-	sudo rm -rf /usr/local/bin/terraform
-	sudo rm -rf /usr/local/bin/terragrunt
 	sudo rm -rf /usr/local/bin/fly
 	sudo rm -rf /usr/local/go/bin/go
+	sudo rm -rf /usr/local/bin/go
 	# Symlink new bins
 	ln -sf ~/dotfiles/bin/kubectl /usr/local/bin/kubectl
+	ln -sf ~/dotfiles/bin/logon /usr/local/bin/logon
+	ln -sf ~/dotfiles/bin/logonf /usr/local/bin/logonf
+	ln -sf ~/dotfiles/bin/kubernikusctl /usr/local/bin/kubernikusctl
+	ln -sf ~/dotfiles/bin/k9s /usr/local/bin/k9s
 	ln -sf ~/dotfiles/bin/openstack /usr/local/bin/openstack
 	ln -sf ~/dotfiles/bin/helm /usr/local/bin/helm
 	ln -sf ~/dotfiles/bin/helm3 /usr/local/bin/helm3
-	ln -sf ~/dotfiles/bin/terraform /usr/local/bin/terraform
-	ln -sf ~/dotfiles/bin/terragrunt /usr/local/bin/terragrunt
 	ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly
-	ln -sf ~/dotfiles/bin/go /usr/local/go/bin/go
+	sudo ln -sf ~/dotfiles/bin/go /usr/local/bin/go
+	sudo ln -sf ~/dotfiles/bin/go /usr/local/go/bin/go
 
 shell:
 	# Set fish as the default shell

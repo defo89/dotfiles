@@ -1,0 +1,15 @@
+#!/bin/bash  
+
+# wget -q --show-progress --https-only --timestamping \
+# https://github.com/derailed/k9s/releases/download/v0.21.7/k9s_Darwin_x86_64.tar.gz
+# # tar xzf k9s_Darwin_x86_64.tar.gz
+# chmod 744 k9s && mv k9s /usr/local/bin/k9s-latest
+
+set -e
+
+COMMAND=/usr/local/bin/k9s-latest
+KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
+KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
+[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+
+exec $COMMAND --context=$KUBECTL_CONTEXT --namespace $KUBECTL_NAMESPACE

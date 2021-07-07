@@ -5,4 +5,4 @@
 # https://github.com/gruntwork-io/terragrunt/releases/download/v0.19.9/terragrunt_darwin_amd64
 # chmod 744 terragrunt_darwin_amd64 && mv terragrunt_darwin_amd64 /usr/local/bin/terragrunt-v0.19.9
 
-docker run --network host -ti -v "$PWD":/wd -w /wd sapcc/terragrunt:v0.19.16 $(basename $(readlink -n $0)) $@ 
+#docker run --network host -ti -v "$PWD":/wd -w /wd sapcc/terragrunt:v0.19.16 $(basename $(readlink -n $0)) $@ 

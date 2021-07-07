@@ -6,4 +6,4 @@
 # tar xzf terraform_0.12.6_darwin_amd64.zip
 # chmod 744 terraform && mv terraform /usr/local/bin/terraform-v0.12.6
 
-docker run --network host -ti -v "$PWD":/wd -w /wd sapcc/terraform $(basename $(readlink -n $0)) $@ 
+#docker run --network host -ti -v "$PWD":/wd -w /wd sapcc/terraform $(basename $(readlink -n $0)) $@ 
