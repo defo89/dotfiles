@@ -1,9 +1,9 @@
-function __kubectl_context
+function __KUBECONTEXT
   set -l context ""
   set -l namespace ""
 
-  if test -n "$KUBECTL_CONTEXT"
-    set context $KUBECTL_CONTEXT
+  if test -n "$KUBECONTEXT"
+    set context $KUBECONTEXT
   else
     set context (cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
   end
@@ -19,5 +19,5 @@ function fish_prompt
   set -gx __fish_git_prompt_showdirtystate true
   set -gx __fish_git_prompt_showcolorhints true
 
-  echo -n -s (set_color -o cyan)(basename (prompt_pwd)) (__fish_git_prompt) (__kubectl_context) (set_color normal) " "
+  echo -n -s (set_color -o cyan)(basename (prompt_pwd)) (__fish_git_prompt) (__KUBECONTEXT) (set_color normal) " "
 end

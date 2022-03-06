@@ -8,6 +8,6 @@
 
 HELM_COMMAND=/usr/local/bin/helm-v3.2.4
 KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
-[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
-exec $HELM_COMMAND --kube-context $KUBECTL_CONTEXT --namespace $KUBECTL_NAMESPACE "$@"
+exec $HELM_COMMAND --kube-context $KUBECONTEXT --namespace $KUBECTL_NAMESPACE "$@"

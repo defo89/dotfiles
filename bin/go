@@ -4,6 +4,6 @@
 # go1.15.6 download
 # which go1.15.6
 
-GO_COMMAND=~/go/bin/go1.15.6
+GO_COMMAND=~/go/bin/go1.17.6
 
 exec $GO_COMMAND "$@"

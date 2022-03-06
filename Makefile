@@ -20,6 +20,7 @@ symlink:
 	ln -sf ~/dotfiles/.config ~/.config
 	# Remove old bins
 	sudo rm -rf /usr/local/bin/kubectl
+	sudo rm -rf /usr/local/bin/kluster
 	sudo rm -rf /usr/local/bin/logon
 	sudo rm -rf /usr/local/bin/logonf
 	sudo rm -rf /usr/local/bin/kubernikusctl
@@ -32,6 +33,7 @@ symlink:
 	sudo rm -rf /usr/local/bin/go
 	# Symlink new bins
 	ln -sf ~/dotfiles/bin/kubectl /usr/local/bin/kubectl
+	ln -sf ~/dotfiles/bin/kluster /usr/local/bin/kluster
 	ln -sf ~/dotfiles/bin/logon /usr/local/bin/logon
 	ln -sf ~/dotfiles/bin/logonf /usr/local/bin/logonf
 	ln -sf ~/dotfiles/bin/kubernikusctl /usr/local/bin/kubernikusctl
@@ -40,6 +42,7 @@ symlink:
 	ln -sf ~/dotfiles/bin/helm /usr/local/bin/helm
 	ln -sf ~/dotfiles/bin/helm3 /usr/local/bin/helm3
 	ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly
+	ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly5
 	sudo ln -sf ~/dotfiles/bin/go /usr/local/bin/go
 	sudo ln -sf ~/dotfiles/bin/go /usr/local/go/bin/go
 

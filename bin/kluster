@@ -1,0 +1,55 @@
+#!/bin/bash  
+
+# install other versions
+# wget -q --show-progress --https-only --timestamping \
+# https://storage.googleapis.com/kubernetes-release/release/v1.15.9/bin/darwin/amd64/kubectl
+# chmod 744 kubectl && mv kubectl /usr/local/bin/kubectl-v1.15.9
+
+
+set -e
+
+KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
+KUBECTL_VERSION=${KUBECTL_VERSION:-1.20.6}
+KUBECTL_COMMAND=/usr/local/bin/kubectl-v$KUBECTL_VERSION
+KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+
+logon
+
+case $KUBECONTEXT in
+  k-master)
+    BASE_URL=kubernikus-master.eu-nl-1.cloud.sap
+    ;;
+  v-*)
+    BASE_URL=kubernikus-v.${KUBECONTEXT#"v-"}.cloud.sap
+    ;;
+  k-*)
+    BASE_URL=kubernikus.${KUBECONTEXT#"k-"}.cloud.sap
+    ;;
+  admin)
+    BASE_URL=$KUBECTL_NAMESPACE.admin.cloud.sap
+    ;;
+esac
+
+exec $KUBECTL_COMMAND --context $KUBECONTEXT --namespace $KUBECTL_NAMESPACE get secret $1-secret -ogo-template-file=<(cat<< EOF
+{{ \$cluster := index .metadata.ownerReferences 0 "name" -}}
+apiVersion: v1
+kind: Config
+clusters:
+  - name: {{ \$cluster }}
+    cluster:
+       certificate-authority-data: {{ index .data "tls-ca.pem" }}
+       server: https://{{ \$cluster }}.${BASE_URL}
+contexts:
+  - name: {{ \$cluster }}
+    context:
+      cluster: {{ \$cluster }}
+      user: {{ \$cluster }}
+current-context: {{ \$cluster }}
+users:
+  - name: {{ \$cluster }}
+    user:
+      client-certificate-data: {{ index .data "apiserver-clients-cluster-admin.pem" }}
+      client-key-data: {{ index .data "apiserver-clients-cluster-admin-key.pem" }}
+EOF
+)

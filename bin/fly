@@ -3,7 +3,8 @@
 # install other versions
 # chmod 744 fly && mv fly /usr/local/bin/fly-v5.4.1
 
-FLY_COMMAND=/usr/local/bin/fly-v5.4.1
-FLY_TARGET=concourse-new
+FLY_COMMAND=/usr/local/bin/fly7
+#FLY_TARGET=main-eu-de-2
 
-exec $FLY_COMMAND -t $FLY_TARGET "$@"
+#exec $FLY_COMMAND -t $FLY_TARGET "$@"
+exec $FLY_COMMAND "$@"

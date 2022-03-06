@@ -10,6 +10,6 @@ set -e
 COMMAND=/usr/local/bin/k9s-latest
 KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
 KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
-[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
-exec $COMMAND --context=$KUBECTL_CONTEXT --namespace $KUBECTL_NAMESPACE
+exec $COMMAND --context=$KUBECONTEXT --namespace $KUBECTL_NAMESPACE

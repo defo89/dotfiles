@@ -9,6 +9,6 @@ set -e
 KLOGON=/usr/local/bin/kubectl-logon
 KSYNC=/usr/local/bin/kubectl-sync
 KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
-[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
-exec $KSYNC logon --context=$KUBECTL_CONTEXT --force -v debug
+exec $KLOGON --kubecontext=$KUBECONTEXT

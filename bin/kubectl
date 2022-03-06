@@ -12,7 +12,7 @@ KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
 KUBECTL_VERSION=${KUBECTL_VERSION:-1.20.6}
 KUBECTL_COMMAND=/usr/local/bin/kubectl-v$KUBECTL_VERSION
 KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
-[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
 logon
-exec $KUBECTL_COMMAND --context $KUBECTL_CONTEXT --namespace $KUBECTL_NAMESPACE "$@"
+exec $KUBECTL_COMMAND --context $KUBECONTEXT --namespace $KUBECTL_NAMESPACE "$@"

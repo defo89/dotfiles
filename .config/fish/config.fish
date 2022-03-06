@@ -3,10 +3,19 @@ set -g fish_greeting ''
 set EDITOR /usr/bin/vim
 set -x GOPATH $HOME/go
 set -x GOBINPATH $HOME/goBin
-set -x K8S_USERNAME $USER
-set -x K8S_PASSWORD (security find-generic-password -a $USER -s openstack -w)
+#set -x K8S_USERNAME $USER
+#set -x K8S_PASSWORD (security find-generic-password -a $USER -s openstack -w)
 set -x GITHUB_TOKEN (security find-generic-password -a $USER -s monsoonctl -w)
 set -x NETBOX_TOKEN (security find-generic-password -a $USER -s netboxprod -w)
+set -x SECRETS_REPO_PATH (security find-generic-password -a $USER -s cc-secrets -w)
+set -x OS_USERNAME $USER
+set -x OS_PASSWORD (security find-generic-password -a $USER -s openstack -w)
+set -x PYCCLOUD_SECRETS_REPO_PATH $GOPATH/src/$SECRETS_REPO_PATH
+set -x PYCCLOUD_KUBERNETES_CONFIG ~/.kube/config
+
+set -x VAULT_ADDR https://vault.global.cloud.sap
+set -x VAULT_TOKEN (cat ~/.vault-token)
+set -x VAULT_KV_ENGINE secrets
 
 set -g fish_user_paths "/usr/local/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
@@ -108,12 +117,20 @@ alias oldssh="ssh -o KexAlgorithms=+diffie-hellman-group1-sha1"
 alias sshclean="ssh-keygen -R"
 alias sshc="ssh-keygen -R"
 
-alias flyservices="fly5 -t eu-de-2 login --team-name services"
-alias flycontrolplane="fly5 -t eu-de-2 login --team-name controlplane"
+alias drill="spore drill"
+
+alias flyoldservices="fly5 login -c https://ci.eu-de-2.cloud.sap/ -t old-eu  --team-name services"
+alias flyoldcontrolplane="fly5 login -c https://ci.eu-de-2.cloud.sap/ -t old-eu --team-name controlplane"
+alias flyservices="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t main-eu-de-2 --team-name services"
+alias flycontrolplane="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t main-eu-de-2 --team-name controlplane"
+
+alias vaultlogin="vault login --method oidc"
 
 alias ksshall="kgn | awk '{print $1}' | grep -v "NAME" | tr '\n' ' ' | xargs csshX --login core"
 
-alias dockerclean="docker system prune"
+alias dockerclean="docker system prune && docker rmi -f (docker images -aq)"
+
+alias awslogin="aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/sapcc"
 
 alias brewshow="echo '--Listing formulae:' && brew list -1 && echo '--Taps:' && brew tap && echo '--Casks:' && brew cask list"
 

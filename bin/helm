@@ -7,6 +7,6 @@
 # chmod 744 darwin-amd64/helm && mv darwin-amd64/helm /usr/local/bin/helm-v2.16.3
 
 HELM_COMMAND=/usr/local/bin/helm-v2.11.0
-[[ -z "$KUBECTL_CONTEXT" ]] && KUBECTL_CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
-exec $HELM_COMMAND --kube-context $KUBECTL_CONTEXT "$@"
+exec $HELM_COMMAND --kube-context $KUBECONTEXT "$@"
