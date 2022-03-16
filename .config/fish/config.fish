@@ -12,9 +12,9 @@ set -x OS_USERNAME $USER
 set -x OS_PASSWORD (security find-generic-password -a $USER -s openstack -w)
 set -x PYCCLOUD_SECRETS_REPO_PATH $GOPATH/src/$SECRETS_REPO_PATH
 set -x PYCCLOUD_KUBERNETES_CONFIG ~/.kube/config
+set -x PYCCLOUD_VAULT_TOKEN_FILE ~/.vault-token
 
 set -x VAULT_ADDR https://vault.global.cloud.sap
-set -x VAULT_TOKEN (cat ~/.vault-token)
 set -x VAULT_KV_ENGINE secrets
 
 set -g fish_user_paths "/usr/local/bin" $fish_user_paths
@@ -29,6 +29,8 @@ set -g fish_user_paths "/usr/local/opt/go/libexec/bin" $fish_user_paths
 alias c="code ."
 alias goland="/usr/local/bin/goland"
 
+alias python="python3"
+
 alias o="openstack"
 alias ozl="openstack zone list"
 alias orl="openstack recordset list"
@@ -41,7 +43,7 @@ alias k="kubectl"
 alias kinfo="kubectl cluster-info"
 alias kg="kubectl get"
 alias ky="kubectl get -o yaml"
-alias ksync="kubectl-sync --kubeconfig ~/.kube/config"
+alias ksync="kubectl-sync --kubeconfig ~/.kube/config -v debug"
 alias klogon="kubectl-logon"
 alias kd="kubectl describe"
 alias kgi="kubectl get ingress"
@@ -58,7 +60,7 @@ alias kga="kubectl get all"
 alias kda="kubectl describe all"
 alias kgns="kubectl get ns"
 alias kdns="kubectl describe ns"
-alias kgn="kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,kubernetes.cloud.sap/cp,kubernetes.cloud.sap/apod,kubernetes.cloud.sap/host"
+alias kgn="kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,kubernetes.cloud.sap/cp,kubernetes.cloud.sap/apod,kubernetes.cloud.sap/host,cloud.sap/maintenance-state"
 alias kdn="kubectl describe node"
 alias kgp="kubectl get pod -o wide"
 alias kdp="kubectl describe pod"
