@@ -24,27 +24,35 @@ symlink:
 	sudo rm -rf /usr/local/bin/logon
 	sudo rm -rf /usr/local/bin/logonf
 	sudo rm -rf /usr/local/bin/kubernikusctl
+	sudo rm -rf /usr/local/bin/binding
+	sudo rm -rf /usr/local/bin/hammer
 	sudo rm -rf /usr/local/go/bin/k9s
 	sudo rm -rf /usr/local/bin/openstack
+	sudo rm -rf /usr/local/bin/openstack-swift
 	sudo rm -rf /usr/local/bin/helm
-	sudo rm -rf /usr/local/bin/helm3
+	sudo rm -rf /usr/local/bin/helm2
 	sudo rm -rf /usr/local/bin/fly
 	sudo rm -rf /usr/local/go/bin/go
 	sudo rm -rf /usr/local/bin/go
 	# Symlink new bins
-	ln -sf ~/dotfiles/bin/kubectl /usr/local/bin/kubectl
-	ln -sf ~/dotfiles/bin/kluster /usr/local/bin/kluster
-	ln -sf ~/dotfiles/bin/logon /usr/local/bin/logon
-	ln -sf ~/dotfiles/bin/logonf /usr/local/bin/logonf
-	ln -sf ~/dotfiles/bin/kubernikusctl /usr/local/bin/kubernikusctl
-	ln -sf ~/dotfiles/bin/k9s /usr/local/bin/k9s
-	ln -sf ~/dotfiles/bin/openstack /usr/local/bin/openstack
-	ln -sf ~/dotfiles/bin/helm /usr/local/bin/helm
-	ln -sf ~/dotfiles/bin/helm3 /usr/local/bin/helm3
-	ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly
-	ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly5
+	sudo ln -sf ~/dotfiles/bin/kubectl /usr/local/bin/kubectl
+	sudo ln -sf ~/dotfiles/bin/kluster /usr/local/bin/kluster
+	sudo ln -sf ~/dotfiles/bin/logon /usr/local/bin/logon
+	sudo ln -sf ~/dotfiles/bin/logonf /usr/local/bin/logonf
+	sudo ln -sf ~/dotfiles/bin/kubernikusctl /usr/local/bin/kubernikusctl
+	sudo ln -sf ~/dotfiles/bin/binding /usr/local/bin/binding
+	sudo ln -sf ~/dotfiles/bin/hammer /usr/local/bin/hammer
+	sudo ln -sf ~/dotfiles/bin/k9s /usr/local/bin/k9s
+	sudo ln -sf ~/dotfiles/bin/openstack /usr/local/bin/openstack
+	sudo ln -sf ~/dotfiles/bin/openstack-swift /usr/local/bin/openstack-swift
+	sudo ln -sf ~/dotfiles/bin/helm /usr/local/bin/helm
+	sudo ln -sf ~/dotfiles/bin/helm2 /usr/local/bin/helm2
+	sudo ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly
+	sudo ln -sf ~/dotfiles/bin/fly /usr/local/bin/fly5
 	sudo ln -sf ~/dotfiles/bin/go /usr/local/bin/go
 	sudo ln -sf ~/dotfiles/bin/go /usr/local/go/bin/go
+	sudo ln -sf ~/dotfiles/bin/terraform /usr/local/bin/terraform
+	sudo ln -sf ~/dotfiles/bin/terragrunt /usr/local/bin/terragrunt
 
 shell:
 	# Set fish as the default shell

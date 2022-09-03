@@ -1,9 +1,7 @@
 #!/bin/bash  
 
-# go get golang.org/dl/go1.15.6
-# go1.15.6 download
-# which go1.15.6
+# go install golang.org/dl/go1.19@latest
+# go1.19 downlaod
 
-GO_COMMAND=~/go/bin/go1.17.6
-
+GO_COMMAND=/Users/$USER/go/bin/go1.19
 exec $GO_COMMAND "$@"

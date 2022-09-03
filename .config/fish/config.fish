@@ -5,11 +5,12 @@ set -x GOPATH $HOME/go
 set -x GOBINPATH $HOME/goBin
 #set -x K8S_USERNAME $USER
 #set -x K8S_PASSWORD (security find-generic-password -a $USER -s openstack -w)
-set -x GITHUB_TOKEN (security find-generic-password -a $USER -s monsoonctl -w)
+#set -x GITHUB_TOKEN (security find-generic-password -a $USER -s monsoonctl -w)
 set -x NETBOX_TOKEN (security find-generic-password -a $USER -s netboxprod -w)
 set -x SECRETS_REPO_PATH (security find-generic-password -a $USER -s cc-secrets -w)
 set -x OS_USERNAME $USER
 set -x OS_PASSWORD (security find-generic-password -a $USER -s openstack -w)
+set -x HAMMER_REPO_PATH (security find-generic-password -a $USER -s cc-hammer -w)
 set -x PYCCLOUD_SECRETS_REPO_PATH $GOPATH/src/$SECRETS_REPO_PATH
 set -x PYCCLOUD_KUBERNETES_CONFIG ~/.kube/config
 set -x PYCCLOUD_VAULT_TOKEN_FILE ~/.vault-token
@@ -44,6 +45,7 @@ alias kinfo="kubectl cluster-info"
 alias kg="kubectl get"
 alias ky="kubectl get -o yaml"
 alias ksync="kubectl-sync --kubeconfig ~/.kube/config -v debug"
+alias klogonall="kubectl-sync logon --all"
 alias klogon="kubectl-logon"
 alias kd="kubectl describe"
 alias kgi="kubectl get ingress"
@@ -78,13 +80,13 @@ alias kpodcountnr="kubectl get pod -o wide --all-namespaces | grep -v 'Running\|
 alias kdrain="kubectl drain --ignore-daemonsets --delete-local-data --force"
 alias kcidr="kubectl describe nodes | grep PodCIDR | awk '{print $2}' | sort"
 
-alias kl="kubectl logs --tail=50"
+alias kl="kubectl logs --timestamps"
 alias wkgn="watch -n 1 kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,kubernetes.cloud.sap/cp,kubernetes.cloud.sap/apod,kubernetes.cloud.sap/host"
 alias wkgp="watch -n 1 kubectl get pod -o wide"
 alias wkgpnr="watch -n 1 'kubectl get pod -o wide | grep -v Running | grep -v Completed'"
 alias wkgpanr="watch -n 1 'kubectl get pod -o wide --all-namespaces | grep -v Running| grep -v Completed'"
 
-alias cont="kubectl --kubeconfig '/Users/c5267192/OneDrive - SAP SE/Desktop/HOMESHARE/CCLOUD/gateway-api/contour-config.yml' --context contour"
+alias cont="kubectl --kubeconfig '/Users/$USER/OneDrive - SAP SE/Desktop/HOMESHARE/CCLOUD/gateway-api/contour-config.yml' --context contour"
 
 alias g="git"
 alias ga="git add"
@@ -115,7 +117,7 @@ alias dnskill="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;
 alias myip="curl api.ipify.org -w \n"
 alias speed="speedtest-cli --simple"
 
-alias oldssh="ssh -o KexAlgorithms=+diffie-hellman-group1-sha1"
+alias oldssh="ssh -o KexAlgorithms=+diffie-hellman-group-exchange-sha1"
 alias sshclean="ssh-keygen -R"
 alias sshc="ssh-keygen -R"
 
@@ -123,10 +125,12 @@ alias drill="spore drill"
 
 alias flyoldservices="fly5 login -c https://ci.eu-de-2.cloud.sap/ -t old-eu  --team-name services"
 alias flyoldcontrolplane="fly5 login -c https://ci.eu-de-2.cloud.sap/ -t old-eu --team-name controlplane"
-alias flyservices="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t main-eu-de-2 --team-name services"
-alias flycontrolplane="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t main-eu-de-2 --team-name controlplane"
+alias flyservices="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t ci1 --team-name services"
+alias flycontrolplane="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t ci1 --team-name controlplane"
+alias flycore="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t ci1 --team-name core"
 
 alias vaultlogin="vault login --method oidc"
+alias vaultreset="VAULT_ADDR=file:///dev/null vault-injector import-from ."
 
 alias ksshall="kgn | awk '{print $1}' | grep -v "NAME" | tr '\n' ' ' | xargs csshX --login core"
 
@@ -136,7 +140,7 @@ alias awslogin="aws ecr-public get-login-password --region us-east-1 | docker lo
 
 alias brewshow="echo '--Listing formulae:' && brew list -1 && echo '--Taps:' && brew tap && echo '--Casks:' && brew cask list"
 
-[ -f /usr/local/share/autojump/autojump.fish ]; and . /usr/local/share/autojump/autojump.fish
+[ -f /opt/homebrew/share/autojump/autojump.fish ]; and . /opt/homebrew/share/autojump/autojump.fish
 eval (direnv hook fish)
 
 test -e {$HOME}/dotfiles/.iterm2_shell_integration.fish ; and source {$HOME}/dotfiles/.iterm2_shell_integration.fish

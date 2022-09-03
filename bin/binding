@@ -1,0 +1,37 @@
+#!/bin/bash  
+
+set -e -o pipefail
+
+SECRETS_REPO_PATH=$(security find-generic-password -a $USER -s cc-secrets -w)
+OS_USERNAME=$USER
+PYCCLOUD_OS_PW_CMD=$(security find-generic-password -a $USER -s openstack -w)
+PYCCLOUD_SECRETS_REPO_PATH=$GOPATH/src/$SECRETS_REPO_PATH
+PYCCLOUD_KUBERNETES_CONFIG=~/.kube/config
+PYCCLOUD_VAULT_TOKEN_FILE=~/.vault-token
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+
+
+NAME=$1
+BB=$(echo "$1" | sed 's/.*-//')
+NODE=$(echo "$1" | sed 's/-.*//')
+NODENR=$(echo "$NODE" | sed 's/[^0-9]//g')
+BINDING=$(hammer --region $KUBECONTEXT aci pc | grep -i $1 | grep bond1)
+VPC=$(hammer --region $KUBECONTEXT aci pc-profiles | grep -i ${BB}_VPC_Profile | grep -i profile | awk '{print $2}')
+PORT=$(hammer --region $KUBECONTEXT aci pc-profiles | grep -i $1 | grep bond1 | awk '{print $3}')
+SPEED=$(hammer --region $KUBECONTEXT aci show-policies $1 | grep Link | awk '{print $4}' | head -n 1)
+
+echo "link speed policy is $SPEED. Cross check with pc_policy_group"
+
+cat <<-EOF
+      - name: ${BB}
+        availability_zones: [$KUBECONTEXTa]  # check AZ
+        hosts: []
+        bindings: []
+        baremetal_pc_policy_group: 10g-default
+        subgroups:
+          - name: ${1}
+            bindings:
+              - ${BINDING}
+            port_selectors:
+              - ${VPC}/${PORT}
+EOF

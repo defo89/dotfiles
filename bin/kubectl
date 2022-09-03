@@ -3,13 +3,14 @@
 # install other versions
 # wget -q --show-progress --https-only --timestamping \
 # https://storage.googleapis.com/kubernetes-release/release/v1.15.9/bin/darwin/amd64/kubectl
+# https://storage.googleapis.com/kubernetes-release/release/v1.21.8/bin/darwin/arm64/kubectl
 # chmod 744 kubectl && mv kubectl /usr/local/bin/kubectl-v1.15.9
 
 
 set -e
 
 KUBECONFIG=${KUBECONFIG:-$HOME/.kube/config}
-KUBECTL_VERSION=${KUBECTL_VERSION:-1.20.6}
+KUBECTL_VERSION=${KUBECTL_VERSION:-1.23.6}
 KUBECTL_COMMAND=/usr/local/bin/kubectl-v$KUBECTL_VERSION
 KUBECTL_NAMESPACE=${KUBECTL_NAMESPACE:-default}
 [[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")

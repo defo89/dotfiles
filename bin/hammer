@@ -1,0 +1,13 @@
+#!/bin/bash  
+
+set -e
+
+SECRETS_REPO_PATH=$(security find-generic-password -a $USER -s cc-secrets -w)
+OS_USERNAME=$USER
+PYCCLOUD_OS_PW_CMD=$(security find-generic-password -a $USER -s openstack -w)
+PYCCLOUD_SECRETS_REPO_PATH=$GOPATH/src/$SECRETS_REPO_PATH
+PYCCLOUD_KUBERNETES_CONFIG=~/.kube/config
+PYCCLOUD_VAULT_TOKEN_FILE=~/.vault-token
+[[ -z "$KUBECONTEXT" ]] && KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+
+exec $GOPATH/src/$HAMMER_REPO_PATH/venv/bin/hammer --region ${KUBECONTEXT#[skiav]-} "$@"

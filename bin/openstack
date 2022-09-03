@@ -24,4 +24,4 @@ docker run --network host -ti \
   -e "OS_USERNAME=$OS_USERNAME" \
   -e "OS_USER_DOMAIN_NAME="$OS_PROJECT_DOMAIN_NAME"" \
   -e "OS_PASSWORD=$OS_PASSWORD" \
-  dmitrijsf/openstack-client:latest $(basename $(readlink -n $0)) $@ 
+  dmitrijsf/openstack-client:v20220317140257 $(basename $(readlink -n $0)) $@ 

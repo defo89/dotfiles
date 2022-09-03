@@ -7,3 +7,8 @@
 # chmod 744 terraform && mv terraform /usr/local/bin/terraform-v0.12.6
 
 #docker run --network host -ti -v "$PWD":/wd -w /wd sapcc/terraform $(basename $(readlink -n $0)) $@ 
+
+TF_COMMAND=/usr/local/bin/terraform-v0.12.31
+#TF_COMMAND=/usr/local/bin/terraform-v1.1.8
+#TF_COMMAND=/usr/local/bin/terraform-v0.13.7
+exec $TF_COMMAND "$@"
