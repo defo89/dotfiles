@@ -1,6 +1,6 @@
 #!/bin/bash  
 
-# go install golang.org/dl/go1.19@latest
+# go get golang.org/dl/go1.19@latest
 # go1.19 downlaod
 
 GO_COMMAND=/Users/$USER/go/bin/go1.19

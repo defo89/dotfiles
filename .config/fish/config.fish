@@ -2,7 +2,7 @@ set -g fish_greeting ''
 
 set EDITOR /usr/bin/vim
 set -x GOPATH $HOME/go
-set -x GOBINPATH $HOME/goBin
+set -x GOBINPATH $HOME/go/bin
 #set -x K8S_USERNAME $USER
 #set -x K8S_PASSWORD (security find-generic-password -a $USER -s openstack -w)
 #set -x GITHUB_TOKEN (security find-generic-password -a $USER -s monsoonctl -w)
