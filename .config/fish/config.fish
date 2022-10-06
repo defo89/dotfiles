@@ -62,7 +62,7 @@ alias kga="kubectl get all"
 alias kda="kubectl describe all"
 alias kgns="kubectl get ns"
 alias kdns="kubectl describe ns"
-alias kgn="kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,kubernetes.cloud.sap/cp,kubernetes.cloud.sap/apod,kubernetes.cloud.sap/host,cloud.sap/maintenance-state"
+alias kgn="kubectl get node --label-columns failure-domain.beta.kubernetes.io/zone,kubernetes.cloud.sap/cp,kubernetes.cloud.sap/apod,kubernetes.cloud.sap/host,flatcar-linux-update.v1.flatcar-linux.net/version,cloud.sap/maintenance-state"
 alias kdn="kubectl describe node"
 alias kgp="kubectl get pod -o wide"
 alias kdp="kubectl describe pod"
@@ -117,7 +117,7 @@ alias dnskill="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;
 alias myip="curl api.ipify.org -w \n"
 alias speed="speedtest-cli --simple"
 
-alias oldssh="ssh -o KexAlgorithms=+diffie-hellman-group-exchange-sha1"
+alias oldssh="ssh -o KexAlgorithms=+diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1"
 alias sshclean="ssh-keygen -R"
 alias sshc="ssh-keygen -R"
 
@@ -129,7 +129,7 @@ alias flyservices="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t ci1 --team-na
 alias flycontrolplane="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t ci1 --team-name controlplane"
 alias flycore="fly7 login -c https://ci1.eu-de-2.cloud.sap/ -t ci1 --team-name core"
 
-alias vaultlogin="vault login --method oidc"
+alias vaultlogin="vault login --method oidc --no-print"
 alias vaultreset="VAULT_ADDR=file:///dev/null vault-injector import-from ."
 
 alias ksshall="kgn | awk '{print $1}' | grep -v "NAME" | tr '\n' ' ' | xargs csshX --login core"
